@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Change to match your DB (e.g., postgresql, sqlite)
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id         Int    @id @default(autoincrement())
+  name       String
+  password   String
+  email      String
+  room_count Int
+}
+
+model Staff {
+  id            Int     @id @default(autoincrement())
+  name          String
+  contactNumber String
+  Role          Role
+  dateOfJoin    DateTime
+  salary        Decimal
+  gender        Gender
+  age           Int
+}
+
+model Student {
+  id               Int    @id @default(autoincrement())
+  name             String
+  RollNumber       String @unique
+  college          String
+  email            String @unique
+  password         String
+  mobileNumber     String
+  gender           Gender
+  age              Int
+  emergencyContact String
+  parentContact    String
+  parentEmail      String
+  roomId           Int?
+
+  Room        Room?        @relation(fields: [roomId], references: [id])
+  FeePayments FeePayment[]
+  GatePasses  GatePass[]
+  Feedbacks   Feedback[]
+}
+
+model Room {
+  id          Int    @id @default(autoincrement())
+  room_number String @unique
+
+  Students Student[] // One-to-Many: A room can have multiple students
+}
+
+model FeePayment {
+  id            Int    @id @default(autoincrement())
+  semester      Int
+  dateOfPayment DateTime
+  transactionId String
+  modeOfPayment String
+  studentId     Int
+
+  Student Student @relation(fields: [studentId], references: [id])
+}
+
+model Feedback {
+  id         Int    @id @default(autoincrement())
+  studentId  Int
+  issue      String
+  roomNumber String
+
+  Student Student @relation(fields: [studentId], references: [id])
+}
+
+model GatePass {
+  id          Int    @id @default(autoincrement())
+  reason      String
+  leaveDate   DateTime
+  arrivalDate DateTime
+  approval    Approval
+  studentId   Int
+
+  Student Student @relation(fields: [studentId], references: [id])
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum Role {
+  ADMIN
+  WARDEN
+  STAFF
+}
+
+enum Approval {
+  PENDING
+  APPROVED
+  REJECTED
+}
