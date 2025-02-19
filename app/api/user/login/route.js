@@ -13,7 +13,7 @@ export async function POST(request) {
     let user = await prisma.admin.findFirst({
       where: { email: email }
     })
-    let role = 'admin'
+    let role = '';
 
     // If not found in admin, check student table
     if (!user) {
