@@ -47,11 +47,12 @@ enum GenderEnum {
 
 model Student1 {
   id       Int        @id @default(autoincrement())
-  name     String
+  name     String?
   email    String     @unique
   password String
-  gender   GenderEnum
-  age      Int
+  gender   GenderEnum   @default(MALE)
+  age      Int          @default(0)
+  role     String       @default("student")
 
   student2    Student2?
   feedbacks   Feedback[]

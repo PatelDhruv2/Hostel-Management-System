@@ -22,7 +22,16 @@ export default function Login() {
       if (result.error) {
         setError(result.error);
       } else {
-        router.push('/dashboard');
+        // Get user role after successful login
+        const userResponse = await fetch('/api/auth/session');
+        const userData = await userResponse.json();
+        
+        // Redirect based on role
+        if (userData.user.role === 'admin') {
+          router.push('/admindashboard');
+        } else {
+          router.push('/dashboard');
+        }
       }
     } catch (error) {
       setError('An error occurred during sign in');

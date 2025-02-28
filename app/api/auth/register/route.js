@@ -22,6 +22,9 @@ export async function POST(req) {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Check if this is the first user (make them admin) or use a specific admin email pattern
+    const isAdmin = email.endsWith('@admin.com'); // You can change this condition
+
     // Create the user
     const user = await prisma.student1.create({
       data: {
@@ -30,6 +33,7 @@ export async function POST(req) {
         name: '', // These will be filled in later
         gender: 'MALE', // Default value
         age: 0, // Default value
+        role: isAdmin ? 'admin' : 'student', // Set role based on condition
       },
     });
 

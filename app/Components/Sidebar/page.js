@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -9,7 +10,7 @@ import Link from "next/link";
 import { toast, Bounce } from "react-toastify";
 import { FaAccessibleIcon } from "react-icons/fa";
 
-export default function Sidebar() {
+export default function AppSidebar() {  // Renamed from Sidebar to AppSidebar
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -27,8 +28,8 @@ export default function Sidebar() {
           top: 48,
           height: "100vh",
           zIndex: 1000,
-          backgroundColor: "#FFFFFF", // Sidebar background
-          color: "#000000", // Sidebar text color
+          backgroundColor: "#FFFFFF",
+          color: "#000000",
         }}
       >
         <Menu>
@@ -37,8 +38,8 @@ export default function Sidebar() {
             icon={<MenuRoundedIcon />}
             onClick={toggleSidebar}
             style={{
-              backgroundColor: "#e2e8f0", // Menu background
-              color: "#000", // Menu text color
+              backgroundColor: "#e2e8f0",
+              color: "#000",
             }}
           >
             <h2>Manage Medicine</h2>
@@ -55,33 +56,33 @@ export default function Sidebar() {
           </MenuItem>
           <MenuItem
             icon={<SpeedDialIcon />}
-            component={<Link href="/medicationHistory" passHref />}
+            component={<Link href="/Components/FeedBack" passHref />}
             style={{
               backgroundColor: "#e2e8f0",
               color: "#000",
             }}
           >
-            Medication History
+            FeedBack
           </MenuItem>
           <MenuItem
             icon={<FaAccessibleIcon />}
-            component={<Link href="/hospital-location" passHref />}
+            component={<Link href="/GatePass" passHref />}
             style={{
               backgroundColor: "#e2e8f0",
               color: "#000",
             }}
           >
-            Find Nearby Hospitals
+            gatePass
           </MenuItem>
           <MenuItem
             icon={<ReceiptRoundedIcon />}
-            component={<Link href="/health-records" passHref />}
+            component={<Link href="/feedback" passHref />}
             style={{
               backgroundColor: "#e2e8f0",
               color: "#000",
             }}
           >
-            Health Records
+            Submit Feedback
           </MenuItem>
           <MenuItem
             icon={<LogoutRoundedIcon />}
