@@ -23,26 +23,47 @@ export const authOptions = {
           throw new Error('Please enter an email and password');
         }
 
-        const user = await prisma.student1.findUnique({
+        // First check Admin table
+        const admin = await prisma.admin.findUnique({
           where: {
             email: credentials.email
           }
         });
 
-        if (!user) {
+        if (admin) {
+          const passwordMatch = await bcrypt.compare(credentials.password, admin.password);
+          if (!passwordMatch) {
+            throw new Error('Invalid password');
+          }
+          return {
+            id: admin.id,
+            email: admin.email,
+            name: admin.name,
+            isAdmin: true
+          };
+        }
+
+        // If not admin, check Student1 table
+        const student = await prisma.student1.findUnique({
+          where: {
+            email: credentials.email
+          }
+        });
+
+        if (!student) {
           throw new Error('No user found with this email');
         }
 
-        const passwordMatch = await bcrypt.compare(credentials.password, user.password);
+        const passwordMatch = await bcrypt.compare(credentials.password, student.password);
         if (!passwordMatch) {
           throw new Error('Invalid password');
         }
 
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
+          id: student.id,
+          email: student.email,
+          name: student.name,
+          isAdmin: false
         };
       }
     })
@@ -51,13 +72,13 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = user.role;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id;
-      session.user.role = token.role;
+      session.user.isAdmin = token.isAdmin;
       return session;
     },
   },

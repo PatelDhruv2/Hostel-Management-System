@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
-    const isAdmin = token?.role === "admin";
+    const isAdmin = token?.isAdmin;
     const path = req.nextUrl.pathname;
 
     // Redirect admin to admin dashboard if trying to access student dashboard

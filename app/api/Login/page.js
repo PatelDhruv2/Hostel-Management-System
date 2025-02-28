@@ -22,12 +22,12 @@ export default function Login() {
       if (result.error) {
         setError(result.error);
       } else {
-        // Get user role after successful login
+        // Get user data after successful login
         const userResponse = await fetch('/api/auth/session');
         const userData = await userResponse.json();
         
-        // Redirect based on role
-        if (userData.user.role === 'admin') {
+        // Redirect based on isAdmin flag
+        if (userData.user.isAdmin) {
           router.push('/admindashboard');
         } else {
           router.push('/dashboard');
@@ -82,7 +82,6 @@ export default function Login() {
             </button>
           </div>
         </form>
-
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}

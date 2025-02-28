@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    if (session?.user?.role !== 'admin') {
+    if (!session?.user?.isAdmin) {
       router.push('/dashboard');
     }
   }, [session, router]);
