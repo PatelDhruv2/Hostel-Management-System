@@ -8,19 +8,14 @@ export default function ProfileInfo() {
   const router = useRouter();
   
   const [formData, setFormData] = useState({
-    // Student1 fields
     name: '',
     gender: 'MALE',
     age: '',
-    
-    // Student2 fields
     mobile_number: '',
     address: '',
     emergency_number: '',
     parent_contact: '',
     roll_number: '',
-    
-    // College fields
     college_name: ''
   });
 
@@ -59,161 +54,152 @@ export default function ProfileInfo() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto space-y-8">
-        <div>
-          <h2 className="text-center text-3xl font-extrabold text-gray-900">
-            Complete Your Profile
-          </h2>
-        </div>
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          {error && (
-            <div className="text-red-500 text-center">{error}</div>
-          )}
-          
-          <div className="space-y-6 bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-medium text-gray-900">Personal Information</h3>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
+    <div className="container">
+      <div className="form-box">
+        <h2>Complete Your Profile</h2>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Gender
-                </label>
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                >
-                  <option value="MALE">Male</option>
-                  <option value="FEMALE">Female</option>
-                  <option value="OTHER">Other</option>
-                </select>
-              </div>
+        {error && <div className="error">{error}</div>}
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Age
-                </label>
-                <input
-                  type="number"
-                  name="age"
-                  required
-                  value={formData.age}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <legend>Personal Information</legend>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Mobile Number
-                </label>
-                <input
-                  type="tel"
-                  name="mobile_number"
-                  required
-                  value={formData.mobile_number}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Address
-                </label>
-                <textarea
-                  name="address"
-                  required
-                  value={formData.address}
-                  onChange={handleChange}
-                  rows={3}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Emergency Contact
-                </label>
-                <input
-                  type="tel"
-                  name="emergency_number"
-                  required
-                  value={formData.emergency_number}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Parent Contact
-                </label>
-                <input
-                  type="tel"
-                  name="parent_contact"
-                  required
-                  value={formData.parent_contact}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Roll Number
-                </label>
-                <input
-                  type="number"
-                  name="roll_number"
-                  required
-                  value={formData.roll_number}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  College Name
-                </label>
-                <input
-                  type="text"
-                  name="college_name"
-                  required
-                  value={formData.college_name}
-                  onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
+            <div className="form-group">
+              <label>Full Name</label>
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required />
             </div>
-          </div>
 
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Complete Profile
-            </button>
-          </div>
+            <div className="form-group">
+              <label>Gender</label>
+              <select name="gender" value={formData.gender} onChange={handleChange}>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Age</label>
+              <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Mobile Number</label>
+              <input type="tel" name="mobile_number" value={formData.mobile_number} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Address</label>
+              <textarea name="address" value={formData.address} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Emergency Contact</label>
+              <input type="tel" name="emergency_number" value={formData.emergency_number} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Parent Contact</label>
+              <input type="tel" name="parent_contact" value={formData.parent_contact} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Roll Number</label>
+              <input type="number" name="roll_number" value={formData.roll_number} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>College Name</label>
+              <input type="text" name="college_name" value={formData.college_name} onChange={handleChange} required />
+            </div>
+
+            <button type="submit">Complete Profile</button>
+          </fieldset>
         </form>
       </div>
+
+      <style jsx>{`
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          min-height: 100vh;
+          background-color: #f9f9f9;
+          padding: 50px 20px;
+        }
+
+        .form-box {
+          width: 100%;
+          max-width: 600px;
+          background-color: white;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+          text-align: center;
+          margin-bottom: 20px;
+          color: #333;
+        }
+
+        .error {
+          color: red;
+          text-align: center;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+
+        fieldset {
+          border: none;
+          padding: 0;
+        }
+
+        legend {
+          font-size: 1.2rem;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        label {
+          display: block;
+          font-weight: 500;
+          margin-bottom: 5px;
+          color: #555;
+        }
+
+        input, select, textarea {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+
+        textarea {
+          resize: vertical;
+        }
+
+        button {
+          width: 100%;
+          padding: 10px;
+          background-color: #007bff;
+          color: white;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        button:hover {
+          background-color: #0056b3;
+        }
+      `}</style>
     </div>
   );
 }
