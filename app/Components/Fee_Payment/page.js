@@ -14,7 +14,7 @@ export default function FeePayment() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await fetch('/api/feepayment/submit', {
         method: 'POST',
@@ -43,9 +43,9 @@ export default function FeePayment() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -54,22 +54,16 @@ export default function FeePayment() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Fee Payment Details
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Submit your hostel fee payment information
-          </p>
+    <div style={styles.pageContainer}>
+      <div style={styles.formContainer}>
+        <div style={styles.header}>
+          <h2 style={styles.title}>Fee Payment Details</h2>
+          <p style={styles.subtitle}>Submit your hostel fee payment information</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="semester" className="block text-sm font-medium text-gray-700">
-              Semester
-            </label>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div style={styles.formGroup}>
+            <label htmlFor="semester" style={styles.label}>Semester</label>
             <input
               type="number"
               id="semester"
@@ -79,15 +73,13 @@ export default function FeePayment() {
               max="8"
               value={formData.semester}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
               placeholder="Enter semester number (1-8)"
             />
           </div>
 
-          <div>
-            <label htmlFor="date_of_payment" className="block text-sm font-medium text-gray-700">
-              Payment Date
-            </label>
+          <div style={styles.formGroup}>
+            <label htmlFor="date_of_payment" style={styles.label}>Payment Date</label>
             <input
               type="datetime-local"
               id="date_of_payment"
@@ -95,14 +87,12 @@ export default function FeePayment() {
               required
               value={formData.date_of_payment}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
             />
           </div>
 
-          <div>
-            <label htmlFor="Transaction_id" className="block text-sm font-medium text-gray-700">
-              Transaction ID
-            </label>
+          <div style={styles.formGroup}>
+            <label htmlFor="Transaction_id" style={styles.label}>Transaction ID</label>
             <input
               type="text"
               id="Transaction_id"
@@ -110,22 +100,20 @@ export default function FeePayment() {
               required
               value={formData.Transaction_id}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
               placeholder="Enter transaction ID"
             />
           </div>
 
-          <div>
-            <label htmlFor="mode_of_payment" className="block text-sm font-medium text-gray-700">
-              Payment Mode
-            </label>
+          <div style={styles.formGroup}>
+            <label htmlFor="mode_of_payment" style={styles.label}>Payment Mode</label>
             <select
               id="mode_of_payment"
               name="mode_of_payment"
               required
               value={formData.mode_of_payment}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
             >
               <option value="UPI">UPI</option>
               <option value="NET_BANKING">Net Banking</option>
@@ -135,27 +123,105 @@ export default function FeePayment() {
             </select>
           </div>
 
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Submit Payment Details
-            </button>
-          </div>
+          <button type="submit" style={styles.submitButton}>
+            Submit Payment Details
+          </button>
         </form>
 
-        {/* Payment Instructions */}
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Payment Instructions</h3>
-          <div className="mt-2 text-sm text-gray-600 space-y-2">
-            <p>1. Make the payment using your preferred payment method</p>
-            <p>2. Note down the transaction ID from your payment</p>
-            <p>3. Fill in the form with accurate payment details</p>
-            <p>4. Keep the transaction ID safe for future reference</p>
-          </div>
+        <div style={styles.instructions}>
+          <h3 style={styles.instructionTitle}>Payment Instructions</h3>
+          <ul style={styles.instructionList}>
+            <li>1. Make the payment using your preferred payment method</li>
+            <li>2. Note down the transaction ID from your payment</li>
+            <li>3. Fill in the form with accurate payment details</li>
+            <li>4. Keep the transaction ID safe for future reference</li>
+          </ul>
         </div>
       </div>
     </div>
   );
 }
+
+const styles = {
+  pageContainer: {
+    minHeight: '100vh',
+    backgroundColor: '#f9fafb',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '16px',
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: '500px',
+    backgroundColor: '#fff',
+    padding: '32px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: '24px',
+  },
+  title: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  subtitle: {
+    fontSize: '14px',
+    color: '#6b7280',
+    marginTop: '8px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
+  formGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: '500',
+    marginBottom: '4px',
+    color: '#4b5563',
+  },
+  input: {
+    padding: '8px 12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '4px',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  },
+  submitButton: {
+    padding: '10px',
+    backgroundColor: '#4f46e5',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    marginTop: '16px',
+  },
+  instructions: {
+    marginTop: '32px',
+    paddingTop: '16px',
+    borderTop: '1px solid #e5e7eb',
+  },
+  instructionTitle: {
+    fontSize: '16px',
+    fontWeight: '600',
+    marginBottom: '8px',
+    color: '#111827',
+  },
+  instructionList: {
+    fontSize: '14px',
+    color: '#4b5563',
+    lineHeight: '1.5',
+    paddingLeft: '16px',
+  },
+};

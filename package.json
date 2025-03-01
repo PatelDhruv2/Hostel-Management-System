@@ -13,6 +13,7 @@
     "@mui/material": "^6.4.6",
     "@prisma/client": "^6.4.1",
     "bcryptjs": "^3.0.2",
+    "hostel-02": "file:",
     "next": "15.2.0",
     "next-auth": "^4.24.11",
     "prisma": "^6.4.1",

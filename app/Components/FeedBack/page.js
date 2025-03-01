@@ -12,7 +12,7 @@ export default function FeedBack() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await fetch('/api/feedback/submit', {
         method: 'POST',
@@ -33,11 +33,12 @@ export default function FeedBack() {
       toast.error('An error occurred while submitting feedback');
     }
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -46,22 +47,16 @@ export default function FeedBack() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Submit Feedback
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Let us know about your concerns or suggestions
-          </p>
+    <div style={styles.pageContainer}>
+      <div style={styles.formContainer}>
+        <div style={styles.header}>
+          <h2 style={styles.title}>Submit Feedback</h2>
+          <p style={styles.subtitle}>Let us know about your concerns or suggestions</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="room_number" className="block text-sm font-medium text-gray-700">
-              Room Number
-            </label>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div style={styles.formGroup}>
+            <label htmlFor="room_number" style={styles.label}>Room Number</label>
             <input
               type="text"
               id="room_number"
@@ -69,15 +64,13 @@ export default function FeedBack() {
               required
               value={formData.room_number}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
               placeholder="Enter your room number"
             />
           </div>
 
-          <div>
-            <label htmlFor="issue" className="block text-sm font-medium text-gray-700">
-              Issue Description
-            </label>
+          <div style={styles.formGroup}>
+            <label htmlFor="issue" style={styles.label}>Issue Description</label>
             <textarea
               id="issue"
               name="issue"
@@ -85,21 +78,92 @@ export default function FeedBack() {
               rows={4}
               value={formData.issue}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.textarea}
               placeholder="Describe your issue or suggestion"
             />
           </div>
 
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Submit Feedback
-            </button>
-          </div>
+          <button type="submit" style={styles.submitButton}>
+            Submit Feedback
+          </button>
         </form>
       </div>
     </div>
   );
 }
+
+const styles = {
+  pageContainer: {
+    minHeight: '100vh',
+    backgroundColor: '#f9fafb',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '16px',
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: '500px',
+    backgroundColor: '#fff',
+    padding: '32px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: '24px',
+  },
+  title: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  subtitle: {
+    fontSize: '14px',
+    color: '#6b7280',
+    marginTop: '8px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
+  formGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: '500',
+    marginBottom: '4px',
+    color: '#4b5563',
+  },
+  input: {
+    padding: '8px 12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '4px',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  },
+  textarea: {
+    padding: '8px 12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '4px',
+    fontSize: '14px',
+    outline: 'none',
+    resize: 'vertical',
+    transition: 'border-color 0.2s',
+  },
+  submitButton: {
+    padding: '10px',
+    backgroundColor: '#4f46e5',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    marginTop: '16px',
+  },
+};

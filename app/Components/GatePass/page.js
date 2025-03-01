@@ -13,7 +13,7 @@ export default function GatePass() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await fetch('/api/gatepass/submit', {
         method: 'POST',
@@ -37,9 +37,9 @@ export default function GatePass() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -48,20 +48,18 @@ export default function GatePass() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Gate Pass Request
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
+    <div style={styles.pageContainer}>
+      <div style={styles.formContainer}>
+        <div style={styles.header}>
+          <h2 style={styles.title}>Gate Pass Request</h2>
+          <p style={styles.subtitle}>
             Submit your gate pass request for approval
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div style={styles.formGroup}>
+            <label htmlFor="reason" style={styles.label}>
               Reason for Leave
             </label>
             <textarea
@@ -71,13 +69,13 @@ export default function GatePass() {
               rows={4}
               value={formData.reason}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.textarea}
               placeholder="Please provide a detailed reason for your leave"
             />
           </div>
 
-          <div>
-            <label htmlFor="leave_date" className="block text-sm font-medium text-gray-700">
+          <div style={styles.formGroup}>
+            <label htmlFor="leave_date" style={styles.label}>
               Leave Date & Time
             </label>
             <input
@@ -87,12 +85,12 @@ export default function GatePass() {
               required
               value={formData.leave_date}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
             />
           </div>
 
-          <div>
-            <label htmlFor="arrival_date" className="block text-sm font-medium text-gray-700">
+          <div style={styles.formGroup}>
+            <label htmlFor="arrival_date" style={styles.label}>
               Expected Arrival Date & Time
             </label>
             <input
@@ -102,29 +100,114 @@ export default function GatePass() {
               required
               value={formData.arrival_date}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              style={styles.input}
             />
           </div>
 
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Submit Gate Pass Request
-            </button>
-          </div>
+          <button type="submit" style={styles.submitButton}>
+            Submit Gate Pass Request
+          </button>
         </form>
 
-        {/* Status section */}
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Request Status</h3>
-          <p className="mt-2 text-sm text-gray-600">
-            Your request will be reviewed by the hostel administration.
-            Initial status will be "PENDING".
+        {/* Status Section */}
+        <div style={styles.statusSection}>
+          <h3 style={styles.statusTitle}>Request Status</h3>
+          <p style={styles.statusText}>
+            Your request will be reviewed by the hostel administration. Initial status will be <strong>PENDING</strong>.
           </p>
         </div>
       </div>
     </div>
   );
 }
+
+const styles = {
+  pageContainer: {
+    minHeight: '100vh',
+    backgroundColor: '#f9fafb',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '16px',
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: '500px',
+    backgroundColor: '#ffffff',
+    padding: '32px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: '24px',
+  },
+  title: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  subtitle: {
+    fontSize: '14px',
+    color: '#6b7280',
+    marginTop: '8px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
+  formGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: '500',
+    marginBottom: '4px',
+    color: '#4b5563',
+  },
+  input: {
+    padding: '8px 12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '4px',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  },
+  textarea: {
+    padding: '8px 12px',
+    border: '1px solid #d1d5db',
+    borderRadius: '4px',
+    fontSize: '14px',
+    outline: 'none',
+    resize: 'vertical',
+    transition: 'border-color 0.2s',
+  },
+  submitButton: {
+    padding: '10px',
+    backgroundColor: '#4f46e5',
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    marginTop: '16px',
+  },
+  statusSection: {
+    marginTop: '24px',
+    paddingTop: '16px',
+    borderTop: '1px solid #e5e7eb',
+  },
+  statusTitle: {
+    fontSize: '18px',
+    fontWeight: '600',
+    color: '#111827',
+  },
+  statusText: {
+    fontSize: '14px',
+    color: '#6b7280',
+    marginTop: '8px',
+  },
+};

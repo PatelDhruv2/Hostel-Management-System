@@ -9,14 +9,12 @@ import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import Link from "next/link";
 import { toast, Bounce } from "react-toastify";
 import { FaAccessibleIcon } from "react-icons/fa";
-
-export default function AppSidebar() {  // Renamed from Sidebar to AppSidebar
+export default function AppSidebar() { 
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setCollapsed((prevState) => !prevState);
   };
-
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       {/* Sidebar */}
@@ -42,7 +40,7 @@ export default function AppSidebar() {  // Renamed from Sidebar to AppSidebar
               color: "#000",
             }}
           >
-            <h2>Manage Medicine</h2>
+            <h2>Hostel Management System</h2>
           </MenuItem>
           <MenuItem
             icon={<GridViewRoundedIcon />}
@@ -66,7 +64,7 @@ export default function AppSidebar() {  // Renamed from Sidebar to AppSidebar
           </MenuItem>
           <MenuItem
             icon={<FaAccessibleIcon />}
-            component={<Link href="/GatePass" passHref />}
+            component={<Link href="/Components/GatePass" passHref />}
             style={{
               backgroundColor: "#e2e8f0",
               color: "#000",
@@ -76,13 +74,13 @@ export default function AppSidebar() {  // Renamed from Sidebar to AppSidebar
           </MenuItem>
           <MenuItem
             icon={<ReceiptRoundedIcon />}
-            component={<Link href="/feedback" passHref />}
+            component={<Link href="/Components/Fee_Payment" passHref />}
             style={{
               backgroundColor: "#e2e8f0",
               color: "#000",
             }}
           >
-            Submit Feedback
+           Fee Payment
           </MenuItem>
           <MenuItem
             icon={<LogoutRoundedIcon />}

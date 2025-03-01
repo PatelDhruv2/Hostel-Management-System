@@ -42,35 +42,34 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex">
+    <div style={styles.container}>
       <AppSidebar />
-      <main className="flex-1 p-8 ml-[240px]"> {/* Adjust ml-[240px] based on your sidebar width */}
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white shadow rounded-lg p-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+      <main style={styles.main}>
+        <div style={styles.contentWrapper}>
+          <div style={styles.card}>
+            <h1 style={styles.heading}>
               Hi, {studentData?.name || session.user.email}! 👋
             </h1>
-            <p className="text-gray-600">
+            <p style={styles.subtext}>
               Welcome to your student dashboard
             </p>
           </div>
 
-          {/* Add more dashboard content here */}
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Example dashboard cards */}
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Room Status</h2>
-              <p className="text-gray-600">Your room information and status</p>
+          {/* Dashboard cards section */}
+          <div style={styles.cardsGrid}>
+            <div style={styles.card}>
+              <h2 style={styles.cardHeading}>Room Status</h2>
+              <p style={styles.cardText}>Your room information and status</p>
             </div>
 
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Fee Status</h2>
-              <p className="text-gray-600">View your fee payment status</p>
+            <div style={styles.card}>
+              <h2 style={styles.cardHeading}>Fee Status</h2>
+              <p style={styles.cardText}>View your fee payment status</p>
             </div>
 
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Gate Passes</h2>
-              <p className="text-gray-600">Manage your gate pass requests</p>
+            <div style={styles.card}>
+              <h2 style={styles.cardHeading}>Gate Passes</h2>
+              <p style={styles.cardText}>Manage your gate pass requests</p>
             </div>
           </div>
         </div>
@@ -78,3 +77,50 @@ export default function Dashboard() {
     </div>
   );
 }
+
+const styles = {
+  container: {
+    display: 'flex',
+    minHeight: '100vh',
+  },
+  main: {
+    flex: 1,
+    padding: '32px',
+    marginLeft: '240px', // Adjust this based on your actual sidebar width
+  },
+  contentWrapper: {
+    maxWidth: '1280px',
+    margin: '0 auto',
+  },
+  card: {
+    backgroundColor: 'white',
+    padding: '24px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    marginBottom: '24px',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#111827',
+    marginBottom: '8px',
+  },
+  subtext: {
+    color: '#6b7280',
+  },
+  cardsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '24px',
+    marginTop: '24px',
+  },
+  cardHeading: {
+    fontSize: '18px',
+    fontWeight: '600',
+    color: '#111827',
+    marginBottom: '8px',
+  },
+  cardText: {
+    color: '#6b7280',
+  },
+};

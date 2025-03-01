@@ -22,11 +22,9 @@ export default function Login() {
       if (result.error) {
         setError(result.error);
       } else {
-        // Get user data after successful login
         const userResponse = await fetch('/api/auth/session');
         const userData = await userResponse.json();
-        
-        // Redirect based on isAdmin flag
+
         if (userData.user.isAdmin) {
           router.push('/admindashboard');
         } else {
@@ -39,58 +37,105 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="text-red-500 text-center text-sm">{error}</div>
-          )}
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <input
-                type="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2 style={styles.heading}>Sign in to your account</h2>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          {error && <div style={styles.error}>{error}</div>}
+          <div style={styles.inputGroup}>
+            <input
+              type="email"
+              required
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ ...styles.input, borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}
+            />
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ ...styles.input, borderBottomLeftRadius: '4px', borderBottomRightRadius: '4px' }}
+            />
           </div>
-
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign in
-            </button>
-          </div>
+          <button type="submit" style={styles.button}>Sign in</button>
         </form>
-        <div className="text-center mt-4">
-          <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link href="/api/Signup" className="text-indigo-600 hover:text-indigo-500">
-              Sign up
-            </Link>
-          </p>
-        </div>
+
+        <p style={styles.footerText}>
+          Don't have an account?{' '}
+          <Link href="/api/Signup" style={styles.link}>
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f9fafb',
+  },
+  card: {
+    width: '100%',
+    maxWidth: '400px',
+    padding: '32px',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  },
+  heading: {
+    textAlign: 'center',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#111827',
+    marginBottom: '24px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
+  error: {
+    color: '#dc2626',
+    textAlign: 'center',
+    fontSize: '14px',
+  },
+  inputGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  input: {
+    width: '100%',
+    padding: '10px',
+    border: '1px solid #d1d5db',
+    fontSize: '14px',
+    color: '#374151',
+    outline: 'none',
+  },
+  button: {
+    padding: '10px',
+    backgroundColor: '#4f46e5',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '14px',
+  },
+  footerText: {
+    textAlign: 'center',
+    fontSize: '14px',
+    color: '#6b7280',
+    marginTop: '16px',
+  },
+  link: {
+    color: '#4f46e5',
+    textDecoration: 'none',
+  },
+};
