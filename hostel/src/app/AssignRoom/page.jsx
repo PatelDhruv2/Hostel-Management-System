@@ -79,53 +79,118 @@ export default function AssignRoom() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-                <div className="text-xl">Loading...</div>
+            <div style={{ 
+                minHeight: "100vh", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                backgroundColor: "#F8FAFC", 
+                color: "#333" 
+            }}>
+                <div style={{ fontSize: "1.25rem" }}>Loading...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-4">
-            <div className="max-w-4xl mx-auto">
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold">Assign Students to Room</h1>
+        <div style={{ 
+            minHeight: "100vh", 
+            backgroundColor: "#F8FAFC", 
+            color: "#333", 
+            padding: "1rem" 
+        }}>
+            <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+                <div style={{ 
+                    display: "flex", 
+                    justifyContent: "space-between", 
+                    alignItems: "center", 
+                    marginBottom: "1.5rem" 
+                }}>
+                    <h1 style={{ 
+                        fontSize: "1.5rem", 
+                        fontWeight: "bold",
+                        display: "flex",
+                        alignItems: "center"
+                    }}>
+                        <span style={{ marginRight: "0.5rem" }}>🏠</span> Assign Students to Room
+                    </h1>
                     <button
                         onClick={() => router.push("/AdminDashboard")}
-                        className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 transition"
+                        style={{
+                            backgroundColor: "#D9EAFD",
+                            padding: "0.5rem 1rem",
+                            borderRadius: "0.375rem",
+                            border: "none",
+                            cursor: "pointer",
+                            transition: "background-color 0.3s",
+                            display: "flex",
+                            alignItems: "center"
+                        }}
+                        onMouseOver={(e) => e.target.style.backgroundColor = "#BCCCDC"}
+                        onMouseOut={(e) => e.target.style.backgroundColor = "#D9EAFD"}
                     >
-                        Back to Dashboard
+                        <span style={{ marginRight: "0.5rem" }}>↩️</span> Back to Dashboard
                     </button>
                 </div>
 
-                <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                <div style={{ 
+                    backgroundColor: "white", 
+                    padding: "1.5rem", 
+                    borderRadius: "0.5rem", 
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    border: "1px solid #BCCCDC"
+                }}>
+                    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                         <div>
-                            <label className="block text-sm font-medium mb-2">
+                            <label style={{ 
+                                display: "block",
+                                fontSize: "0.875rem",
+                                fontWeight: "500",
+                                marginBottom: "0.5rem"
+                            }}>
                                 Room ID (e.g., D-304)
                             </label>
                             <input
                                 type="text"
                                 value={roomId}
                                 onChange={(e) => setRoomId(e.target.value)}
-                                className="w-full px-3 py-2 bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                style={{ 
+                                    width: "100%", 
+                                    padding: "0.75rem", 
+                                    backgroundColor: "white", 
+                                    borderRadius: "0.25rem",
+                                    border: "1px solid #BCCCDC",
+                                    outline: "none"
+                                }}
                                 required
                                 placeholder="Enter room ID"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium mb-2">
+                            <label style={{ 
+                                display: "block",
+                                fontSize: "0.875rem",
+                                fontWeight: "500",
+                                marginBottom: "0.5rem" 
+                            }}>
                                 Student Emails (Max: {roomCount})
                             </label>
-                            <div className="space-y-2">
+                            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                                 {studentEmails.map((email, index) => (
                                     <input
                                         key={index}
                                         type="email"
                                         value={email}
                                         onChange={(e) => handleEmailChange(index, e.target.value)}
-                                        className="w-full px-3 py-2 bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        style={{ 
+                                            width: "100%", 
+                                            padding: "0.75rem", 
+                                            backgroundColor: "white", 
+                                            borderRadius: "0.25rem",
+                                            border: "1px solid #BCCCDC",
+                                            outline: "none"
+                                        }}
                                         placeholder={`Student ${index + 1} email`}
                                     />
                                 ))}
@@ -133,14 +198,36 @@ export default function AssignRoom() {
                         </div>
 
                         {error && (
-                            <div className="text-red-500 text-sm">{error}</div>
+                            <div style={{ 
+                                color: "#DC2626", 
+                                fontSize: "0.875rem",
+                                backgroundColor: "#fee2e2",
+                                padding: "0.5rem",
+                                borderRadius: "0.25rem"
+                            }}>
+                                {error}
+                            </div>
                         )}
 
                         <button
                             type="submit"
-                            className="w-full bg-green-500 px-4 py-2 rounded hover:bg-green-600 transition"
+                            style={{ 
+                                width: "100%", 
+                                backgroundColor: "#D9EAFD", 
+                                padding: "0.75rem", 
+                                borderRadius: "0.25rem",
+                                border: "none",
+                                cursor: "pointer",
+                                transition: "background-color 0.3s",
+                                fontWeight: "600",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                            onMouseOver={(e) => e.target.style.backgroundColor = "#BCCCDC"}
+                            onMouseOut={(e) => e.target.style.backgroundColor = "#D9EAFD"}
                         >
-                            Assign Students to Room
+                            <span style={{ marginRight: "0.5rem" }}>✅</span> Assign Students to Room
                         </button>
                     </form>
                 </div>

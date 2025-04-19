@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { FaUserTie, FaTrash, FaSpinner, FaExclamationCircle, FaUsers } from 'react-icons/fa';
 
 export default function ManageStaff() {
     const [staff, setStaff] = useState([]);
     const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Fetch the staff data when the component is mounted
@@ -20,6 +22,8 @@ export default function ManageStaff() {
                 }
             } catch (error) {
                 setMessage('Error connecting to the server');
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -49,49 +53,159 @@ export default function ManageStaff() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center p-6 bg-gray-900 text-white">
-            <h2 className="text-3xl font-semibold mb-6 text-center">Staff List</h2>
+        <div style={{
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '2rem',
+            backgroundColor: '#F8FAFC',
+            color: '#333',
+            fontFamily: 'Arial, sans-serif'
+        }}>
+            <div style={{
+                maxWidth: '1000px',
+                width: '100%',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '8px',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                padding: '2rem'
+            }}>
+                <h2 style={{
+                    fontSize: '1.75rem',
+                    fontWeight: '600',
+                    marginBottom: '1.5rem',
+                    textAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#333',
+                    borderBottom: '2px solid #D9EAFD',
+                    paddingBottom: '0.75rem'
+                }}>
+                    <FaUsers style={{ marginRight: '0.75rem', color: '#9AA6B2' }} />
+                    Staff List
+                </h2>
 
-            {message && <p className="text-red-500 mb-4 text-center">{message}</p>}
+                {message && (
+                    <div style={{
+                        color: message.includes('successfully') ? '#38A169' : '#E53E3E',
+                        backgroundColor: message.includes('successfully') ? '#F0FFF4' : '#FFF5F5',
+                        border: `1px solid ${message.includes('successfully') ? '#C6F6D5' : '#FED7D7'}`,
+                        borderRadius: '4px',
+                        padding: '0.75rem',
+                        marginBottom: '1rem',
+                        textAlign: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <FaExclamationCircle style={{ marginRight: '0.5rem' }} />
+                        {message}
+                    </div>
+                )}
 
-            <div className="w-full max-w-4xl overflow-hidden bg-gray-800 rounded-lg shadow-lg">
-                <table className="min-w-full text-sm text-left text-gray-400">
-                    <thead className="bg-gray-700">
-                        <tr>
-                            <th className="px-4 py-3">Name</th>
-                            <th className="px-4 py-3">Role</th>
-                            <th className="px-4 py-3">Contact</th>
-                            <th className="px-4 py-3">Salary</th>
-                            <th className="px-4 py-3">Age</th>
-                            <th className="px-4 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {staff.length > 0 ? (
-                            staff.map((staffMember) => (
-                                <tr key={staffMember.id} className="border-t border-gray-600 hover:bg-gray-700">
-                                    <td className="px-4 py-3">{staffMember.name}</td>
-                                    <td className="px-4 py-3">{staffMember.role?.role}</td>
-                                    <td className="px-4 py-3">{staffMember.contact_number}</td>
-                                    <td className="px-4 py-3">{staffMember.salary}</td>
-                                    <td className="px-4 py-3">{staffMember.age}</td>
-                                    <td className="px-4 py-3">
-                                        <button
-                                            onClick={() => handleRemove(staffMember.id)}
-                                            className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
-                                        >
-                                            Remove
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="6" className="p-4 text-center text-gray-300">No staff available</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                {loading ? (
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '2rem'
+                    }}>
+                        <FaSpinner style={{
+                            fontSize: '2rem',
+                            color: '#BCCCDC',
+                            animation: 'spin 1s linear infinite'
+                        }} />
+                        <p style={{ marginTop: '1rem', color: '#9AA6B2' }}>Loading staff data...</p>
+                        <style jsx global>{`
+                            @keyframes spin {
+                                0% { transform: rotate(0deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                        `}</style>
+                    </div>
+                ) : (
+                    <div style={{
+                        width: '100%',
+                        overflow: 'hidden',
+                        backgroundColor: '#FFFFFF',
+                        borderRadius: '8px',
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+                    }}>
+                        <div style={{ overflowX: 'auto' }}>
+                            <table style={{
+                                minWidth: '100%',
+                                fontSize: '0.875rem',
+                                textAlign: 'left',
+                                borderCollapse: 'collapse'
+                            }}>
+                                <thead style={{ backgroundColor: '#D9EAFD' }}>
+                                    <tr>
+                                        <th style={{ padding: '0.75rem 1rem', fontWeight: '600', color: '#4A5568' }}>Name</th>
+                                        <th style={{ padding: '0.75rem 1rem', fontWeight: '600', color: '#4A5568' }}>Role</th>
+                                        <th style={{ padding: '0.75rem 1rem', fontWeight: '600', color: '#4A5568' }}>Contact</th>
+                                        <th style={{ padding: '0.75rem 1rem', fontWeight: '600', color: '#4A5568' }}>Salary</th>
+                                        <th style={{ padding: '0.75rem 1rem', fontWeight: '600', color: '#4A5568' }}>Age</th>
+                                        <th style={{ padding: '0.75rem 1rem', fontWeight: '600', color: '#4A5568' }}>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {staff.length > 0 ? (
+                                        staff.map((staffMember, index) => (
+                                            <tr key={staffMember.id} style={{
+                                                borderTop: '1px solid #BCCCDC',
+                                                backgroundColor: index % 2 === 0 ? '#F8FAFC' : '#FFFFFF',
+                                                transition: 'background-color 0.2s'
+                                            }}>
+                                                <td style={{ padding: '0.75rem 1rem', display: 'flex', alignItems: 'center' }}>
+                                                    <FaUserTie style={{ marginRight: '0.5rem', color: '#9AA6B2' }} />
+                                                    {staffMember.name}
+                                                </td>
+                                                <td style={{ padding: '0.75rem 1rem' }}>{staffMember.role?.role}</td>
+                                                <td style={{ padding: '0.75rem 1rem' }}>{staffMember.contact_number}</td>
+                                                <td style={{ padding: '0.75rem 1rem' }}>{staffMember.salary}</td>
+                                                <td style={{ padding: '0.75rem 1rem' }}>{staffMember.age}</td>
+                                                <td style={{ padding: '0.75rem 1rem' }}>
+                                                    <button
+                                                        onClick={() => handleRemove(staffMember.id)}
+                                                        style={{
+                                                            backgroundColor: '#F56565',
+                                                            color: 'white',
+                                                            padding: '0.5rem 0.75rem',
+                                                            borderRadius: '0.25rem',
+                                                            border: 'none',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            fontSize: '0.875rem',
+                                                            cursor: 'pointer',
+                                                            transition: 'background-color 0.2s'
+                                                        }}
+                                                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#E53E3E'}
+                                                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#F56565'}
+                                                    >
+                                                        <FaTrash style={{ marginRight: '0.5rem' }} />
+                                                        Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="6" style={{
+                                                padding: '1.5rem',
+                                                textAlign: 'center',
+                                                color: '#9AA6B2',
+                                                backgroundColor: '#F8FAFC'
+                                            }}>No staff available</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

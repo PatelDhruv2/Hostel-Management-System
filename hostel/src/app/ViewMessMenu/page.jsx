@@ -34,40 +34,143 @@ export default function ViewMessMenu() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-                <div className="text-xl">Loading...</div>
+            <div style={{
+                minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#F8FAFC',
+                color: '#333',
+                fontFamily: 'Arial, sans-serif'
+            }}>
+                <div style={{
+                    fontSize: '1.25rem',
+                    padding: '1rem 2rem',
+                    backgroundColor: '#D9EAFD',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                }}>Loading...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-4">
-            <div className="max-w-6xl mx-auto">
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold">Weekly Mess Menu</h1>
+        <div style={{
+            minHeight: '100vh',
+            backgroundColor: '#F8FAFC',
+            color: '#333',
+            padding: '1.5rem',
+            fontFamily: 'Arial, sans-serif'
+        }}>
+            <div style={{
+                maxWidth: '1200px',
+                margin: '0 auto'
+            }}>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.5rem',
+                    padding: '1rem',
+                    backgroundColor: '#D9EAFD',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                }}>
+                    <h1 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }}>Weekly Mess Menu</h1>
                     <button
                         onClick={() => router.push("/Dashboard")}
-                        className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 transition"
+                        style={{
+                            backgroundColor: '#9AA6B2',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '4px',
+                            color: 'white',
+                            border: 'none',
+                            cursor: 'pointer',
+                            transition: 'background-color 0.2s',
+                            fontWeight: '500'
+                        }}
                     >
                         Back to Dashboard
                     </button>
                 </div>
 
                 {error ? (
-                    <div className="text-red-500 text-center">{error}</div>
+                    <div style={{
+                        color: '#EF4444',
+                        textAlign: 'center',
+                        padding: '1rem',
+                        backgroundColor: '#FEE2E2',
+                        borderRadius: '8px',
+                        marginTop: '1rem'
+                    }}>{error}</div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                        gap: '1rem'
+                    }}>
                         {days.map(day => (
-                            <div key={day} className="bg-gray-800 p-4 rounded-lg shadow-lg">
-                                <h2 className="text-xl font-semibold mb-4 text-center">{day}</h2>
-                                <div className="space-y-4">
+                            <div key={day} style={{
+                                backgroundColor: '#D9EAFD',
+                                padding: '1.5rem',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                            }}>
+                                <h2 style={{
+                                    fontSize: '1.25rem',
+                                    fontWeight: '600',
+                                    marginBottom: '1rem',
+                                    textAlign: 'center',
+                                    color: '#333',
+                                    borderBottom: '2px solid #BCCCDC',
+                                    paddingBottom: '0.5rem'
+                                }}>{day}</h2>
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '1rem'
+                                }}>
                                     {mealTypes.map(type => (
-                                        <div key={type} className="space-y-2">
-                                            <h3 className="font-medium text-blue-400">{type}</h3>
-                                            <ul className="list-disc list-inside text-gray-300">
+                                        <div key={type} style={{
+                                            backgroundColor: '#F8FAFC',
+                                            padding: '0.75rem',
+                                            borderRadius: '4px'
+                                        }}>
+                                            <h3 style={{
+                                                fontWeight: '500',
+                                                color: '#333',
+                                                marginBottom: '0.5rem',
+                                                fontSize: '1rem',
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            }}>
+                                                <span style={{
+                                                    marginRight: '0.5rem',
+                                                    fontSize: '1.25rem'
+                                                }}>
+                                                    {type === 'Breakfast' ? '🍳' : 
+                                                    type === 'Lunch' ? '🍲' : 
+                                                    type === 'Hi-Tea' ? '☕' : '🍽️'}
+                                                </span>
+                                                {type}
+                                            </h3>
+                                            <ul style={{
+                                                paddingLeft: '1.5rem',
+                                                color: '#555',
+                                                fontSize: '0.9rem'
+                                            }}>
                                                 {menu[day]?.[type]?.map((item, index) => (
-                                                    <li key={index}>{item}</li>
-                                                )) || <li className="text-gray-500">No items added</li>}
+                                                    <li key={index} style={{
+                                                        marginBottom: '0.25rem'
+                                                    }}>{item}</li>
+                                                )) || <li style={{
+                                                    color: '#9AA6B2',
+                                                    fontStyle: 'italic'
+                                                }}>No items added</li>}
                                             </ul>
                                         </div>
                                     ))}

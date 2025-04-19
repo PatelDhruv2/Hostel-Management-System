@@ -60,72 +60,194 @@ export default function AddCommitteeMember() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-6">
-            <h2 className="text-2xl font-bold mb-6">Add Hostel Committee Member</h2>
-            <form onSubmit={handleSubmit} className="w-full max-w-md bg-gray-800 p-6 rounded shadow-md space-y-4">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded bg-gray-700 text-white"
-                    required
-                />
-                <input
-                    type="text"
-                    name="position"
-                    placeholder="Position (e.g., Warden, Member)"
-                    value={formData.position}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded bg-gray-700 text-white"
-                    required
-                />
-                <input
-                    type="text"
-                    name="contact_number"
-                    placeholder="Contact Number"
-                    value={formData.contact_number}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded bg-gray-700 text-white"
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded bg-gray-700 text-white"
-                    required
-                />
-                <input
-                    type="date"
-                    name="date_of_join"
-                    value={formData.date_of_join}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded bg-gray-700 text-white"
-                    required
-                />
-                <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded bg-gray-700 text-white"
-                    required
-                >
-                    <option value="">Select Gender</option>
-                    <option value="MALE">Male</option>
-                    <option value="FEMALE">Female</option>
-                    <option value="OTHER">Other</option>
-                </select>
+        <div style={{ 
+            minHeight: "100vh", 
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            backgroundColor: "#F8FAFC", 
+            color: "#333", 
+            padding: "1.5rem" 
+        }}>
+            <div style={{
+                maxWidth: "500px",
+                width: "100%",
+                backgroundColor: "white",
+                padding: "2rem",
+                borderRadius: "0.5rem",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                border: "1px solid #BCCCDC"
+            }}>
+                <h2 style={{ 
+                    fontSize: "1.5rem", 
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginBottom: "1.5rem",
+                    color: "#4A5568",
+                    borderBottom: "2px solid #D9EAFD",
+                    paddingBottom: "0.5rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                    <span style={{ marginRight: "0.5rem" }}>👥</span> Add Hostel Committee Member
+                </h2>
+                
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Full Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter full name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%",
+                                padding: "0.5rem",
+                                border: "1px solid #BCCCDC",
+                                borderRadius: "0.25rem",
+                                backgroundColor: "white"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Position</label>
+                        <input
+                            type="text"
+                            name="position"
+                            placeholder="e.g., Warden, Member"
+                            value={formData.position}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%",
+                                padding: "0.5rem",
+                                border: "1px solid #BCCCDC",
+                                borderRadius: "0.25rem",
+                                backgroundColor: "white"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Contact Number</label>
+                        <input
+                            type="text"
+                            name="contact_number"
+                            placeholder="Phone number"
+                            value={formData.contact_number}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%",
+                                padding: "0.5rem",
+                                border: "1px solid #BCCCDC",
+                                borderRadius: "0.25rem",
+                                backgroundColor: "white"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="email@example.com"
+                            value={formData.email}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%",
+                                padding: "0.5rem",
+                                border: "1px solid #BCCCDC",
+                                borderRadius: "0.25rem",
+                                backgroundColor: "white"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Date of Join</label>
+                        <input
+                            type="date"
+                            name="date_of_join"
+                            value={formData.date_of_join}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%",
+                                padding: "0.5rem",
+                                border: "1px solid #BCCCDC",
+                                borderRadius: "0.25rem",
+                                backgroundColor: "white"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Gender</label>
+                        <select
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%",
+                                padding: "0.5rem",
+                                border: "1px solid #BCCCDC",
+                                borderRadius: "0.25rem",
+                                backgroundColor: "white"
+                            }}
+                            required
+                        >
+                            <option value="">Select Gender</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
 
-                <button type="submit" className="w-full bg-green-600 hover:bg-green-700 transition p-2 rounded">
-                    Add Member
-                </button>
+                    <button 
+                        type="submit" 
+                        style={{
+                            width: "100%",
+                            backgroundColor: "#D9EAFD",
+                            color: "#333",
+                            padding: "0.75rem",
+                            borderRadius: "0.25rem",
+                            border: "none",
+                            cursor: "pointer",
+                            fontWeight: "600",
+                            marginTop: "0.5rem",
+                            transition: "background-color 0.3s",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                        onMouseOver={(e) => e.target.style.backgroundColor = "#BCCCDC"}
+                        onMouseOut={(e) => e.target.style.backgroundColor = "#D9EAFD"}
+                    >
+                        <span style={{ marginRight: "0.5rem" }}>➕</span> Add Member
+                    </button>
+                </form>
 
-                {message && <p className="text-center text-sm text-red-400">{message}</p>}
-            </form>
+                {message && (
+                    <div style={{ 
+                        marginTop: "1rem", 
+                        color: message.includes('success') ? "#047857" : "#DC2626",
+                        textAlign: "center",
+                        padding: "0.5rem",
+                        backgroundColor: message.includes('success') ? "#d1fae5" : "#fee2e2",
+                        borderRadius: "0.25rem"
+                    }}>
+                        {message}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

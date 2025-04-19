@@ -37,65 +37,176 @@ export default function ViewGatePasses() {
     const getStatusColor = (status) => {
         switch (status) {
             case "APPROVED":
-                return "bg-green-500";
+                return "#4ADE80"; // Green
             case "REJECTED":
-                return "bg-red-500";
+                return "#F87171"; // Red
             case "PENDING":
-                return "bg-yellow-500";
+                return "#FBBF24"; // Yellow
             default:
-                return "bg-gray-500";
+                return "#9AA6B2"; // Gray
+        }
+    };
+
+    const getStatusBgColor = (status) => {
+        switch (status) {
+            case "APPROVED":
+                return "#DCFCE7"; // Light green
+            case "REJECTED":
+                return "#FEE2E2"; // Light red
+            case "PENDING":
+                return "#FEF3C7"; // Light yellow
+            default:
+                return "#F1F5F9"; // Light gray
+        }
+    };
+
+    const getStatusIcon = (status) => {
+        switch (status) {
+            case "APPROVED":
+                return "✅";
+            case "REJECTED":
+                return "❌";
+            case "PENDING":
+                return "⏳";
+            default:
+                return "❓";
         }
     };
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-                <div className="text-xl">Loading...</div>
+            <div style={{
+                minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#F8FAFC',
+                color: '#333',
+                fontFamily: 'Arial, sans-serif'
+            }}>
+                <div style={{
+                    fontSize: '1.25rem',
+                    padding: '1rem 2rem',
+                    backgroundColor: '#D9EAFD',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                }}>Loading...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-4">
-            <div className="max-w-4xl mx-auto">
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold">My Gate Pass Requests</h1>
+        <div style={{
+            minHeight: '100vh',
+            backgroundColor: '#F8FAFC',
+            color: '#333',
+            padding: '1.5rem',
+            fontFamily: 'Arial, sans-serif'
+        }}>
+            <div style={{
+                maxWidth: '900px',
+                margin: '0 auto'
+            }}>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.5rem',
+                    padding: '1rem',
+                    backgroundColor: '#D9EAFD',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                }}>
+                    <h1 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }}>My Gate Pass Requests</h1>
                     <button
                         onClick={() => router.push("/Dashboard")}
-                        className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 transition"
+                        style={{
+                            backgroundColor: '#9AA6B2',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '4px',
+                            color: 'white',
+                            border: 'none',
+                            cursor: 'pointer',
+                            transition: 'background-color 0.2s',
+                            fontWeight: '500'
+                        }}
                     >
                         Back to Dashboard
                     </button>
                 </div>
 
-                <div className="space-y-4">
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem'
+                }}>
                     {gatePasses.length === 0 ? (
-                        <div className="text-center text-gray-400">
+                        <div style={{
+                            textAlign: 'center',
+                            color: '#9AA6B2',
+                            padding: '2rem',
+                            backgroundColor: '#D9EAFD',
+                            borderRadius: '8px',
+                            fontSize: '1.1rem'
+                        }}>
                             No gate pass requests found.
                         </div>
                     ) : (
                         gatePasses.map((gatePass) => (
                             <div
                                 key={gatePass.id}
-                                className="bg-gray-800 p-4 rounded-lg shadow"
+                                style={{
+                                    backgroundColor: '#D9EAFD',
+                                    padding: '1.25rem',
+                                    borderRadius: '8px',
+                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                    borderLeft: `4px solid ${getStatusColor(gatePass.approval)}`
+                                }}
                             >
-                                <div className="flex justify-between items-start">
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'flex-start'
+                                }}>
                                     <div>
-                                        <h3 className="text-lg font-semibold">
+                                        <h3 style={{
+                                            fontSize: '1.1rem',
+                                            fontWeight: '600',
+                                            color: '#333'
+                                        }}>
                                             {new Date(gatePass.leave_date).toLocaleDateString()} -{" "}
                                             {new Date(gatePass.arrival_date).toLocaleDateString()}
                                         </h3>
-                                        <p className="text-gray-300 mt-2">{gatePass.reason}</p>
+                                        <p style={{
+                                            color: '#555',
+                                            marginTop: '0.5rem',
+                                            fontSize: '0.95rem'
+                                        }}>{gatePass.reason}</p>
                                     </div>
-                                    <span
-                                        className={`px-3 py-1 rounded-full text-sm ${getStatusColor(
-                                            gatePass.approval
-                                        )}`}
-                                    >
-                                        {gatePass.approval}
+                                    <span style={{
+                                        padding: '0.4rem 0.75rem',
+                                        borderRadius: '9999px',
+                                        fontSize: '0.875rem',
+                                        backgroundColor: getStatusBgColor(gatePass.approval),
+                                        color: getStatusColor(gatePass.approval),
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.25rem'
+                                    }}>
+                                        {getStatusIcon(gatePass.approval)} {gatePass.approval}
                                     </span>
                                 </div>
-                                <div className="mt-2 text-sm text-gray-400">
+                                <div style={{
+                                    marginTop: '0.75rem',
+                                    fontSize: '0.875rem',
+                                    color: '#777',
+                                    borderTop: '1px solid #BCCCDC',
+                                    paddingTop: '0.5rem'
+                                }}>
                                     Requested on: {new Date(gatePass.createdAt).toLocaleString()}
                                 </div>
                             </div>

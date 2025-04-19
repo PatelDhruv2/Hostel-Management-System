@@ -62,64 +62,163 @@ export default function GatePass() {
     };
 
     return (
-        <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
-            <h2 className="text-2xl font-bold mb-4">Request Gate Pass</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                    type="text"
-                    name="student1_id"
-                    value={formData.student1_id}
-                    readOnly
-                    className="w-full p-2 rounded bg-gray-700 text-white cursor-not-allowed"
-                />
-                <input
-                    type="text"
-                    name="reason"
-                    placeholder="Reason for Leave"
-                    value={formData.reason}
-                    onChange={handleChange}
-                    className="w-full p-2 rounded bg-gray-700 text-white"
-                    required
-                />
-                <input
-                    type="date"
-                    name="leave_date"
-                    value={formData.leave_date}
-                    onChange={handleChange}
-                    className="w-full p-2 rounded bg-gray-700 text-white"
-                    required
-                />
-                <input
-                    type="date"
-                    name="arrival_date"
-                    value={formData.arrival_date}
-                    onChange={handleChange}
-                    className="w-full p-2 rounded bg-gray-700 text-white"
-                    required
-                />
-                <button className="w-full bg-blue-500 p-2 rounded hover:bg-blue-600">
-                    Submit Gate Pass
-                </button>
-            </form>
-
-            {modal.show && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm w-full">
-                        <h3 className={`text-lg font-semibold mb-4 ${modal.success ? "text-green-600" : "text-red-600"}`}>
-                            {modal.success ? "Success" : "Error"}
-                        </h3>
-                        <p className="mb-4">{modal.message}</p>
-                        {!modal.success && (
-                            <button
-                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                onClick={() => setModal({ ...modal, show: false })}
-                            >
-                                Close
-                            </button>
-                        )}
+        <div style={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            padding: "2rem",
+            backgroundColor: "#F8FAFC",
+            minHeight: "100vh"
+        }}>
+            <div style={{ 
+                backgroundColor: "white", 
+                color: "#333", 
+                padding: "1.5rem", 
+                borderRadius: "0.5rem", 
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                maxWidth: "450px", 
+                width: "100%",
+                border: "1px solid #BCCCDC"
+            }}>
+                <h2 style={{ 
+                    fontSize: "1.5rem", 
+                    fontWeight: "bold", 
+                    marginBottom: "1rem",
+                    color: "#4A5568",
+                    borderBottom: "2px solid #D9EAFD",
+                    paddingBottom: "0.5rem",
+                    display: "flex",
+                    alignItems: "center"
+                }}>
+                    <span style={{ marginRight: "0.5rem" }}>🚪</span> Request Gate Pass
+                </h2>
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Reason for Leave</label>
+                        <input
+                            type="text"
+                            name="reason"
+                            placeholder="Please provide a detailed reason for your leave request"
+                            value={formData.reason}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%", 
+                                padding: "0.5rem", 
+                                borderRadius: "0.25rem", 
+                                backgroundColor: "white", 
+                                color: "#333",
+                                border: "1px solid #BCCCDC"
+                            }}
+                            required
+                        />
                     </div>
-                </div>
-            )}
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Leave Date</label>
+                        <input
+                            type="date"
+                            name="leave_date"
+                            value={formData.leave_date}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%", 
+                                padding: "0.5rem", 
+                                borderRadius: "0.25rem", 
+                                backgroundColor: "white", 
+                                color: "#333",
+                                border: "1px solid #BCCCDC"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <div>
+                        <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: "500" }}>Arrival Date</label>
+                        <input
+                            type="date"
+                            name="arrival_date"
+                            value={formData.arrival_date}
+                            onChange={handleChange}
+                            style={{ 
+                                width: "100%", 
+                                padding: "0.5rem", 
+                                borderRadius: "0.25rem", 
+                                backgroundColor: "white", 
+                                color: "#333",
+                                border: "1px solid #BCCCDC"
+                            }}
+                            required
+                        />
+                    </div>
+                    
+                    <button style={{ 
+                        width: "100%", 
+                        backgroundColor: "#D9EAFD", 
+                        padding: "0.75rem", 
+                        borderRadius: "0.25rem",
+                        border: "none",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        marginTop: "0.5rem",
+                        transition: "background-color 0.3s"
+                    }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = "#BCCCDC"}
+                    onMouseOut={(e) => e.target.style.backgroundColor = "#D9EAFD"}>
+                        <span style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <span style={{ marginRight: "0.5rem" }}>📝</span> Submit Gate Pass
+                        </span>
+                    </button>
+                </form>
+
+                {modal.show && (
+                    <div style={{ 
+                        position: "fixed", 
+                        inset: "0", 
+                        display: "flex", 
+                        alignItems: "center", 
+                        justifyContent: "center", 
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        zIndex: "50" 
+                    }}>
+                        <div style={{ 
+                            backgroundColor: "white", 
+                            color: "black", 
+                            padding: "1.5rem", 
+                            borderRadius: "0.5rem", 
+                            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                            maxWidth: "350px", 
+                            width: "100%" 
+                        }}>
+                            <h3 style={{ 
+                                fontSize: "1.125rem", 
+                                fontWeight: "600", 
+                                marginBottom: "1rem",
+                                color: modal.success ? "#047857" : "#DC2626"
+                            }}>
+                                {modal.success ? "Success" : "Error"}
+                            </h3>
+                            <p style={{ marginBottom: "1rem" }}>{modal.message}</p>
+                            {!modal.success && (
+                                <button
+                                    style={{ 
+                                        backgroundColor: "#D9EAFD", 
+                                        color: "#333", 
+                                        padding: "0.5rem 1rem", 
+                                        borderRadius: "0.25rem",
+                                        border: "none",
+                                        cursor: "pointer"
+                                    }}
+                                    onClick={() => setModal({ ...modal, show: false })}
+                                    onMouseOver={(e) => e.target.style.backgroundColor = "#BCCCDC"}
+                                    onMouseOut={(e) => e.target.style.backgroundColor = "#D9EAFD"}
+                                >
+                                    Close
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

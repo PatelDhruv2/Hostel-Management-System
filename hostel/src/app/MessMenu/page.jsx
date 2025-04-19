@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { FaUtensils, FaArrowLeft, FaCalendarAlt, FaClock, FaList, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 
 export default function MessMenu() {
     const router = useRouter();
@@ -44,29 +45,96 @@ export default function MessMenu() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-4">
-            <div className="max-w-4xl mx-auto">
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold">Manage Mess Menu</h1>
+        <div style={{
+            minHeight: '100vh',
+            backgroundColor: '#F8FAFC',
+            color: '#333',
+            padding: '1.5rem',
+            fontFamily: 'Arial, sans-serif'
+        }}>
+            <div style={{
+                maxWidth: '800px',
+                margin: '0 auto'
+            }}>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.5rem',
+                    padding: '1rem',
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                }}>
+                    <h1 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: 'bold',
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}>
+                        <FaUtensils style={{ marginRight: '0.75rem', color: '#9AA6B2' }} />
+                        Manage Mess Menu
+                    </h1>
                     <button
                         onClick={() => router.push("/AdminDashboard")}
-                        className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 transition"
+                        style={{
+                            backgroundColor: '#D9EAFD',
+                            color: '#333',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '0.25rem',
+                            border: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                            fontWeight: '500',
+                            transition: 'background-color 0.2s'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#BCCCDC'}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#D9EAFD'}
                     >
+                        <FaArrowLeft style={{ marginRight: '0.5rem' }} />
                         Back to Dashboard
                     </button>
                 </div>
 
-                <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div style={{
+                    backgroundColor: '#FFFFFF',
+                    padding: '2rem',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                }}>
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                            gap: '1.5rem'
+                        }}>
                             <div>
-                                <label className="block text-sm font-medium mb-2">
+                                <label style={{
+                                    display: 'block',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '600',
+                                    marginBottom: '0.5rem',
+                                    color: '#4A5568',
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }}>
+                                    <FaCalendarAlt style={{ marginRight: '0.5rem', color: '#9AA6B2' }} />
                                     Day
                                 </label>
                                 <select
                                     value={menu.day}
                                     onChange={(e) => setMenu(prev => ({ ...prev, day: e.target.value }))}
-                                    className="w-full px-3 py-2 bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem',
+                                        backgroundColor: '#F8FAFC',
+                                        border: '1px solid #BCCCDC',
+                                        borderRadius: '0.25rem',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s',
+                                        color: '#333'
+                                    }}
                                     required
                                 >
                                     {days.map(day => (
@@ -76,13 +144,31 @@ export default function MessMenu() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium mb-2">
+                                <label style={{
+                                    display: 'block',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '600',
+                                    marginBottom: '0.5rem',
+                                    color: '#4A5568',
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }}>
+                                    <FaClock style={{ marginRight: '0.5rem', color: '#9AA6B2' }} />
                                     Meal Type
                                 </label>
                                 <select
                                     value={menu.meal_type}
                                     onChange={(e) => setMenu(prev => ({ ...prev, meal_type: e.target.value }))}
-                                    className="w-full px-3 py-2 bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem',
+                                        backgroundColor: '#F8FAFC',
+                                        border: '1px solid #BCCCDC',
+                                        borderRadius: '0.25rem',
+                                        outline: 'none',
+                                        transition: 'border-color 0.2s',
+                                        color: '#333'
+                                    }}
                                     required
                                 >
                                     {mealTypes.map(type => (
@@ -93,31 +179,90 @@ export default function MessMenu() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium mb-2">
+                            <label style={{
+                                display: 'block',
+                                fontSize: '0.875rem',
+                                fontWeight: '600',
+                                marginBottom: '0.5rem',
+                                color: '#4A5568',
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                                <FaList style={{ marginRight: '0.5rem', color: '#9AA6B2' }} />
                                 Menu Items (comma-separated)
                             </label>
                             <textarea
                                 value={menu.items}
                                 onChange={(e) => setMenu(prev => ({ ...prev, items: e.target.value }))}
-                                className="w-full px-3 py-2 bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                rows="3"
-                                placeholder="Enter menu items separated by commas"
+                                style={{
+                                    width: '100%',
+                                    padding: '0.75rem',
+                                    backgroundColor: '#F8FAFC',
+                                    border: '1px solid #BCCCDC',
+                                    borderRadius: '0.25rem',
+                                    outline: 'none',
+                                    transition: 'border-color 0.2s',
+                                    resize: 'vertical',
+                                    minHeight: '100px',
+                                    color: '#333',
+                                    fontFamily: 'Arial, sans-serif'
+                                }}
+                                placeholder="Enter menu items separated by commas (e.g., Rice, Dal, Vegetables, Salad)"
                                 required
                             />
                         </div>
 
                         {error && (
-                            <div className="text-red-500 text-sm">{error}</div>
+                            <div style={{
+                                color: '#E53E3E',
+                                padding: '0.75rem',
+                                backgroundColor: '#FFF5F5',
+                                borderRadius: '0.25rem',
+                                border: '1px solid #FED7D7',
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                                <FaExclamationCircle style={{ marginRight: '0.5rem' }} />
+                                {error}
+                            </div>
                         )}
 
                         {success && (
-                            <div className="text-green-500 text-sm">{success}</div>
+                            <div style={{
+                                color: '#38A169',
+                                padding: '0.75rem',
+                                backgroundColor: '#F0FFF4',
+                                borderRadius: '0.25rem',
+                                border: '1px solid #C6F6D5',
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                                <FaCheckCircle style={{ marginRight: '0.5rem' }} />
+                                {success}
+                            </div>
                         )}
 
                         <button
                             type="submit"
-                            className="w-full bg-green-500 px-4 py-2 rounded hover:bg-green-600 transition"
+                            style={{
+                                width: '100%',
+                                backgroundColor: '#68D391',
+                                color: '#FFFFFF',
+                                padding: '0.75rem',
+                                borderRadius: '0.25rem',
+                                border: 'none',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                transition: 'background-color 0.2s',
+                                marginTop: '0.5rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#48BB78'}
+                            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#68D391'}
                         >
+                            <FaUtensils style={{ marginRight: '0.5rem' }} />
                             Add Menu Item
                         </button>
                     </form>

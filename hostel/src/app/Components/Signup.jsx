@@ -41,44 +41,146 @@ export default function SignupForm() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
-            <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md transition-all duration-300">
-                <h2 className="text-2xl font-semibold text-gray-800 text-center">Create an Account</h2>
-                <p className="text-gray-500 text-sm text-center">Sign up to get started</p>
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '100vh',
+            backgroundColor: '#F8FAFC',
+            padding: '1.5rem',
+            fontFamily: 'Arial, sans-serif'
+        }}>
+            <div style={{
+                backgroundColor: '#D9EAFD',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                borderRadius: '12px',
+                padding: '2rem',
+                width: '100%',
+                maxWidth: '450px',
+                transition: 'all 0.3s ease'
+            }}>
+                <h2 style={{
+                    fontSize: '1.5rem',
+                    fontWeight: '600',
+                    color: '#333',
+                    textAlign: 'center',
+                    marginBottom: '0.5rem'
+                }}>Create an Account</h2>
+                <p style={{
+                    color: '#666',
+                    fontSize: '0.875rem',
+                    textAlign: 'center',
+                    marginBottom: '1.5rem'
+                }}>Sign up to get started</p>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-5">
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Full Name"
-                        onChange={handleChange}
-                        className="w-full border border-gray-300 p-3 rounded-lg text-black placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300"
-                        required
-                    />
+                <form onSubmit={handleSubmit} style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem'
+                }}>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Full Name"
+                            onChange={handleChange}
+                            style={{
+                                width: '100%',
+                                border: '1px solid #BCCCDC',
+                                padding: '0.75rem',
+                                paddingLeft: '2.5rem',
+                                borderRadius: '8px',
+                                color: '#333',
+                                backgroundColor: 'white',
+                                fontSize: '1rem',
+                                transition: 'all 0.3s ease'
+                            }}
+                            required
+                        />
+                        <div style={{
+                            position: 'absolute',
+                            left: '0.75rem',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            color: '#9AA6B2',
+                            fontSize: '1.25rem'
+                        }}>👤</div>
+                    </div>
 
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        onChange={handleChange}
-                        className="w-full border border-gray-300 p-3 rounded-lg text-black placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300"
-                        required
-                    />
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            onChange={handleChange}
+                            style={{
+                                width: '100%',
+                                border: '1px solid #BCCCDC',
+                                padding: '0.75rem',
+                                paddingLeft: '2.5rem',
+                                borderRadius: '8px',
+                                color: '#333',
+                                backgroundColor: 'white',
+                                fontSize: '1rem',
+                                transition: 'all 0.3s ease'
+                            }}
+                            required
+                        />
+                        <div style={{
+                            position: 'absolute',
+                            left: '0.75rem',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            color: '#9AA6B2',
+                            fontSize: '1.25rem'
+                        }}>✉️</div>
+                    </div>
 
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={handleChange}
-                        className="w-full border border-gray-300 p-3 rounded-lg text-black placeholder-gray-500 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300"
-                        required
-                    />
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            onChange={handleChange}
+                            style={{
+                                width: '100%',
+                                border: '1px solid #BCCCDC',
+                                padding: '0.75rem',
+                                paddingLeft: '2.5rem',
+                                borderRadius: '8px',
+                                color: '#333',
+                                backgroundColor: 'white',
+                                fontSize: '1rem',
+                                transition: 'all 0.3s ease'
+                            }}
+                            required
+                        />
+                        <div style={{
+                            position: 'absolute',
+                            left: '0.75rem',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            color: '#9AA6B2',
+                            fontSize: '1.25rem'
+                        }}>🔒</div>
+                    </div>
 
                     <button
                         type="submit"
-                        className={`w-full bg-blue-500 text-white p-3 rounded-lg font-medium hover:bg-blue-600 transition-all duration-300 ${
-                            loading ? 'opacity-50 cursor-not-allowed' : ''
-                        }`}
+                        style={{
+                            width: '100%',
+                            backgroundColor: '#9AA6B2',
+                            color: 'white',
+                            padding: '0.75rem',
+                            borderRadius: '8px',
+                            fontWeight: '500',
+                            border: 'none',
+                            cursor: loading ? 'not-allowed' : 'pointer',
+                            opacity: loading ? '0.7' : '1',
+                            transition: 'all 0.3s ease',
+                            marginTop: '0.5rem'
+                        }}
                         disabled={loading}
                     >
                         {loading ? 'Signing up...' : 'Sign Up'}
@@ -86,14 +188,29 @@ export default function SignupForm() {
                 </form>
 
                 {message && (
-                    <p className="mt-3 text-center text-sm font-medium text-red-500 animate-fade-in">
+                    <p style={{
+                        marginTop: '1rem',
+                        textAlign: 'center',
+                        fontSize: '0.875rem',
+                        fontWeight: '500',
+                        color: message.includes('✅') ? '#10B981' : '#EF4444'
+                    }}>
                         {message}
                     </p>
                 )}
 
-                <p className="mt-4 text-sm text-center text-gray-500">
+                <p style={{
+                    marginTop: '1.5rem',
+                    fontSize: '0.875rem',
+                    textAlign: 'center',
+                    color: '#666'
+                }}>
                     Already have an account?{' '}
-                    <a href="/signin" className="text-blue-500 hover:underline">
+                    <a href="/signin" style={{
+                        color: '#9AA6B2',
+                        textDecoration: 'none',
+                        fontWeight: '500'
+                    }}>
                         Log in
                     </a>
                 </p>
